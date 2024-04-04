@@ -12,8 +12,9 @@
     </article>
 
     <div class="MouseHelper">
-      <div>x: {{ mouse.normalized.x }}</div>
-      <div>y: {{ mouse.normalized.y }}</div>
+      <strong>Mouse position</strong>
+      <div>X: {{ mouse.normalized.x.toPrecision(2) }} / 1</div>
+      <div>Y: {{ mouse.normalized.y.toPrecision(2) }} / 1</div>
     </div>
   </div>
 </template>
@@ -144,8 +145,10 @@ onUnmounted(() => {
   align-items: flex-start;
   justify-content: flex-start;
 
-  gap: 5px;
-  padding: 20px;
+  gap: 10px;
+  padding: 20px 30px 30px 30px;
+
+  background-color: #3b3b3b;
 
 
   font-size: 16px;
