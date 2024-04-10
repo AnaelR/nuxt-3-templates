@@ -75,11 +75,11 @@ onMounted(() => {
       side: DoubleSide,
     })
     const plane = new Mesh(geometry, material)
-    plane.position.z = -20
+    plane.position.z = -10
     corgi.scene.add(plane)
   })
 
-  resources.getByNames(['fragment', 'vertex']).then((resources) => {
+  resources.get(['fragment', 'vertex']).then((resources) => {
     const [fragmentShader, vertexShader] = resources
     const geometry = new PlaneGeometry(10, 10)
     const material = new RawShaderMaterial({
@@ -92,7 +92,7 @@ onMounted(() => {
 
     const plane = new Mesh(geometry, material)
     plane.position.x = 10
-    plane.position.z = -20
+    plane.position.z = -10
     corgi.scene.add(plane)
 
     gsap.ticker.add((time) => {

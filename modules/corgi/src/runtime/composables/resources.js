@@ -31,13 +31,7 @@ export const useResources = (() => {
     resources = [...value]
   }
 
-  /**
-   * Get asset and available load promise.
-   * @param {String} name - Name of the resource to be found
-   * @param {Function} done - Not mandatory method to retrieve the resource with the file inside
-   * @returns {Promise} - Promise to be resolved with the resource
-   */
-  const get = async (name) => {
+  const setResource = (name) => {
     const resource = resources.find(item => item?.name === name)
 
     if (!resource) {
@@ -77,26 +71,36 @@ export const useResources = (() => {
   }
 
   /**
-   *  Get all the asset in a promise.
-   * @returns {Promise} - Promise to be resolved with all the resource as an array
-   */
-  const getAll = async () => {
-    return Promise.all(resources.map(resource => get(resource.name)))
-  }
-
-  /**
    *  Get assets by names in a promise.
    * @param {String[]} names
    * @returns {Promise} - Promise to be resolved with all the resource as an array
    */
   const getByNames = async (names = []) => {
-    return Promise.all(resources.filter(resource => names.includes(resource.name)).map(resource => get(resource.name)))
+    return Promise.all(resources.filter(resource => names.includes(resource.name)).map(resource => setResource(resource.name)))
+  }
+
+  /**
+   * Get asset and available load promise.
+   * @param {String | String[]} names - Name or array of names for the resource(s) to be found
+   * @param {Function} done - Not mandatory method to retrieve the resource with the file inside
+   * @returns {Promise} - Promise to be resolved with the resource
+   */
+  const get = (names) => {
+    if (Array.isArray(names)) return getByNames(names)
+    if (typeof names === "string") return setResource(names)
+  }
+
+  /**
+   *  Get all the asset in a promise.
+   * @returns {Promise} - Promise to be resolved with all the resource as an array
+   */
+  const getAll = async () => {
+    return Promise.all(resources.map(resource => setResource(resource.name)))
   }
 
   const instance = {
     add,
     get,
-    getByNames,
     getAll,
   }
 
