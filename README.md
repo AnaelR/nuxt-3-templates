@@ -6,14 +6,14 @@
 [X] - Camera resize
 [X] - Orbit controls
 [X] - Mouse event normalisé
+[ ] - Add shaders resources
+[ ] - Check glslify for vite
+[ ] - Custom shaders demo
 [ ] - Planes that match HTML content position
 [ ] - Three points light preset
 [ ] - Shadow utils
 [ ] - Pixel to 3d size utils
 [ ] - Debug utils
-[ ] - Add shaders resources
-[ ] - Check glslify for vite
-[ ] - Custom shaders demo
 [ ] - Flowmap utils with offscreen canvas check OGL js implementation, threejs journey fbo tutorial
 [ ] - Add callback for when useCorgi is ready aka has draw at least one frame
 [ ] - Post process
