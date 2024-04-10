@@ -100,7 +100,6 @@ onMounted(() => {
     })
   })
 
-
   mouse.value = useNormalizedMouse(canvas.value)
 
   /*
