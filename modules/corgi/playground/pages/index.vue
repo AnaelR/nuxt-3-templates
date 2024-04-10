@@ -23,6 +23,7 @@
 import { RESOURCES_TYPES } from '../../src/runtime/utils/types'
 import { getChild } from '../../src/runtime/utils/gltf'
 import { AgXToneMapping, DoubleSide, Mesh, MeshStandardMaterial, PlaneGeometry, RawShaderMaterial } from 'three'
+import { gsap } from 'gsap'
 
 // Data
 const canvas = ref()
@@ -82,6 +83,9 @@ onMounted(() => {
     const [fragmentShader, vertexShader] = resources
     const geometry = new PlaneGeometry(10, 10)
     const material = new RawShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 }
+      },
       fragmentShader: fragmentShader.asset,
       vertexShader: vertexShader.asset,
     })
@@ -90,6 +94,10 @@ onMounted(() => {
     plane.position.x = 10
     plane.position.z = -20
     corgi.scene.add(plane)
+
+    gsap.ticker.add((time) => {
+      material.uniforms.uTime.value += time * 0.001
+    })
   })
 
 
