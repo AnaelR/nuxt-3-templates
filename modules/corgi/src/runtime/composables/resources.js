@@ -10,7 +10,6 @@ export const useResources = (() => {
   const gltfLoader = new GLTFLoader()
   const dracoLoader = new DRACOLoader()
   dracoLoader.setDecoderPath('/draco/')
-  dracoLoader.preload()
   gltfLoader.setDRACOLoader(dracoLoader)
   const exrLoader = new EXRLoader()
   const textureLoader = new TextureLoader()
