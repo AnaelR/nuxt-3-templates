@@ -13,7 +13,7 @@ void main()	{
   vPosition = position;
 
   vec3 p = position;
-  p.y *= (cos(uTime * 0.1) * 0.1) + 0.9;
+  p.y *= (cos(uTime * 0.5) * 0.1) + 0.9;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4( p, 1.0 );
 
