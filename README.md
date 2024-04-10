@@ -8,7 +8,8 @@
 [X] - Mouse event normalisé
 [x] - Add shaders resources
 [x] - Check glslify for vite
-[ ] - Custom shaders integration
+[x] - Custom shaders integration
+[ ] - Custom shaders import library
 [ ] - Planes that match HTML content position
 [ ] - Three points light preset
 [ ] - Shadow utils
