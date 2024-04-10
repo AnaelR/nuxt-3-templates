@@ -22,8 +22,9 @@
 <script setup>
 import { RESOURCES_TYPES } from '../../src/runtime/utils/types'
 import { getChild } from '../../src/runtime/utils/gltf'
-import { AgXToneMapping, DoubleSide, Mesh, MeshStandardMaterial, PlaneGeometry, RawShaderMaterial } from 'three'
+import { AgXToneMapping, DoubleSide, Mesh, MeshStandardMaterial, PlaneGeometry, RawShaderMaterial, Color } from 'three'
 import { gsap } from 'gsap'
+import { CustomShaderMaterial } from 'three-custom-shader-material/dist/vanilla-a1542be4.cjs.prod'
 
 // Data
 const canvas = ref()
@@ -52,8 +53,10 @@ onMounted(() => {
       useResource('suzanne', '/suzanne.glb', RESOURCES_TYPES.GLTF),
       useResource('suzanne-draco', '/suzanne-draco.glb', RESOURCES_TYPES.GLTF),
       useResource('akaru', '/akaru-texture.png', RESOURCES_TYPES.IMAGE),
-      useResource('fragment', import('@/assets/base-fragment.glsl'), RESOURCES_TYPES.GLSL),
-      useResource('vertex', import('@/assets/base-vertex.glsl'), RESOURCES_TYPES.GLSL),
+      useResource('fragment', import('@/assets/fragment.glsl'), RESOURCES_TYPES.GLSL),
+      useResource('vertex', import('@/assets/vertex.glsl'), RESOURCES_TYPES.GLSL),
+      useResource('custom-fragment', import('@/assets/custom-fragment.glsl'), RESOURCES_TYPES.GLSL),
+      useResource('custom-vertex', import('@/assets/custom-vertex.glsl'), RESOURCES_TYPES.GLSL),
     ]
   )
 
@@ -97,6 +100,30 @@ onMounted(() => {
 
     gsap.ticker.add((time) => {
       material.uniforms.uTime.value += time * 0.001
+    })
+  })
+
+  resources.get(['custom-fragment', 'custom-vertex']).then((resources) => {
+    const [fragmentShader, vertexShader] = resources
+    const geometry = new PlaneGeometry(10, 10)
+    const material = new CustomShaderMaterial({
+      baseMaterial: new MeshStandardMaterial({
+        color: new Color("green"),
+      }),
+      uniforms: {
+        uTime: { value: 0 }
+      },
+      fragmentShader: fragmentShader.asset,
+      vertexShader: vertexShader.asset,
+    })
+
+    const plane = new Mesh(geometry, material)
+    plane.position.x = -10
+    plane.position.z = -10
+    corgi.scene.add(plane)
+
+    gsap.ticker.add((deltaTime) => {
+      material.uniforms.uTime.value += deltaTime * 0.001
     })
   })
 
