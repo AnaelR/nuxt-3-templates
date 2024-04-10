@@ -52,7 +52,7 @@ onMounted(() => {
       useResource('suzanne-draco', '/suzanne-draco.glb', RESOURCES_TYPES.GLTF),
       useResource('akaru', '/akaru-texture.png', RESOURCES_TYPES.IMAGE),
       useResource('fragment', import('@/assets/base-fragment.glsl'), RESOURCES_TYPES.GLSL),
-      useResource('vert', import('@/assets/base-vert.glsl'), RESOURCES_TYPES.GLSL),
+      useResource('vertex', import('@/assets/base-vertex.glsl'), RESOURCES_TYPES.GLSL),
     ]
   )
 
@@ -78,7 +78,7 @@ onMounted(() => {
     corgi.scene.add(plane)
   })
 
-  resources.getByNames(['fragment', 'vert']).then((resources) => {
+  resources.getByNames(['fragment', 'vertex']).then((resources) => {
     const [fragmentShader, vertexShader] = resources
     const geometry = new PlaneGeometry(10, 10)
     const material = new RawShaderMaterial({
