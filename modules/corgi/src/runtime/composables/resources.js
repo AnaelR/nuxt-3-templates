@@ -47,14 +47,20 @@ export const useResources = (() => {
 
     // Get promise with avalaible loader
     let loader = undefined
-    if (resource.type === RESOURCES_TYPES.GLTF) {
-      loader = gltfLoader.loadAsync(resource.path)
-    }
-    if (resource.type === RESOURCES_TYPES.EXR) {
-      loader = exrLoader.loadAsync(resource.path)
-    }
-    if (resource.type === RESOURCES_TYPES.IMAGE) {
-      loader = textureLoader.loadAsync(resource.path)
+
+    switch (resource.type) {
+      case RESOURCES_TYPES.GLTF:
+        loader = gltfLoader.loadAsync(resource.path)
+        break
+      case RESOURCES_TYPES.EXR:
+        loader = exrLoader.loadAsync(resource.path)
+        break
+      case RESOURCES_TYPES.IMAGE:
+        loader = textureLoader.loadAsync(resource.path)
+        break
+      case RESOURCES_TYPES.GLSL:
+        loader = resource.path
+        break
     }
 
     if (!loader) {
@@ -64,11 +70,12 @@ export const useResources = (() => {
 
     return new Promise((resolve) => {
       loader.then((result) => {
-        resource.asset = result
+        resource.asset = result?.default || result
         resolve(resource)
       })
     })
   }
+
   /**
    *  Get all the asset in a promise.
    * @returns {Promise} - Promise to be resolved with all the resource as an array
@@ -77,9 +84,19 @@ export const useResources = (() => {
     return Promise.all(resources.map(resource => get(resource.name)))
   }
 
+  /**
+   *  Get assets by names in a promise.
+   * @param {String[]} names
+   * @returns {Promise} - Promise to be resolved with all the resource as an array
+   */
+  const getByNames = async (names = []) => {
+    return Promise.all(resources.filter(resource => names.includes(resource.name)).map(resource => get(resource.name)))
+  }
+
   const instance = {
     add,
     get,
+    getByNames,
     getAll,
   }
 

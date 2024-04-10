@@ -6,8 +6,9 @@
 [X] - Camera resize
 [X] - Orbit controls
 [X] - Mouse event normalisé
-[ ] - Add shaders resources
-[ ] - Check glslify for vite
+[x] - Add shaders resources
+[x] - Check glslify for vite
+[ ] - Add a time manager to loop trough uniforms and update them (?)
 [ ] - Custom shaders demo
 [ ] - Planes that match HTML content position
 [ ] - Three points light preset

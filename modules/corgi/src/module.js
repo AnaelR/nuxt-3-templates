@@ -1,4 +1,5 @@
-import { defineNuxtModule, addComponent, createResolver, addImports } from '@nuxt/kit'
+import { defineNuxtModule, addComponent, createResolver, addImports, addVitePlugin } from '@nuxt/kit'
+import glsl from 'vite-plugin-glsl'
 
 export default defineNuxtModule({
   meta: {
@@ -10,8 +11,9 @@ export default defineNuxtModule({
   setup () { // options, nuxt
     const resolver = createResolver(import.meta.url)
 
+    // Add vite plugins
+    addVitePlugin(glsl())
 
-    // Exemples
     // Add composables
     addImports({
       name: 'useCorgi',
