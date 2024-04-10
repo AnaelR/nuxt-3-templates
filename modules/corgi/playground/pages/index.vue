@@ -65,14 +65,14 @@ onMounted(() => {
   })
 
   resources.get('akaru').then((resource) => {
-    const geometry = new PlaneGeometry(1, 1)
+    const geometry = new PlaneGeometry(10, 10)
     const material = new MeshStandardMaterial({
       map: resource.asset,
       metalness: 1,
       side: DoubleSide,
     })
     const plane = new Mesh(geometry, material)
-    plane.position.x = 2
+    plane.position.z = -20
     corgi.scene.add(plane)
   })
 
