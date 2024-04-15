@@ -9,7 +9,7 @@
 
 <script setup>
 import { RESOURCES_TYPES } from '../../src/runtime/utils/types'
-import { AgXToneMapping, DoubleSide, Mesh, MeshStandardMaterial, PlaneGeometry } from 'three'
+import { AgXToneMapping, DoubleSide, Mesh, MeshBasicMaterial, PlaneGeometry } from 'three'
 
 // Data
 const canvas = ref()
@@ -32,18 +32,14 @@ onMounted(() => {
 
   resources.add(
     [
-      useResource('envmap', '/envmap.exr', RESOURCES_TYPES.EXR),
       useResource('akaru', '/akaru-texture.png', RESOURCES_TYPES.IMAGE),
     ]
   )
 
-  resources.get(['envmap', 'akaru']).then((resources) => {
-    const [envmapResource, resource] = resources
+  resources.get('akaru').then((resource) => {
 
-    corgi.addEnvmap(envmapResource.asset)
-
-    const geometry = new PlaneGeometry(10, 10)
-    const material = new MeshStandardMaterial({
+    const geometry = new PlaneGeometry(5, 5)
+    const material = new MeshBasicMaterial({
       map: resource.asset,
       side: DoubleSide,
     })
