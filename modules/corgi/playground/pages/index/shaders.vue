@@ -19,8 +19,8 @@ const canvas = ref()
  * @type {import('../../src/runtime/composables/corgi').UseCorgi}
  */
 let corgi = null
+let material = null
 const resources = useResources()
-
 
 // Lifecycle
 onMounted(() => {
@@ -41,8 +41,8 @@ onMounted(() => {
 
   resources.get(['fragment', 'vertex']).then((resources) => {
     const [fragmentShader, vertexShader] = resources
-    const geometry = new PlaneGeometry(10, 10)
-    const material = new RawShaderMaterial({
+    const geometry = new PlaneGeometry(5, 5)
+    material = new RawShaderMaterial({
       uniforms: {
         uTime: { value: 0 }
       },
@@ -53,16 +53,21 @@ onMounted(() => {
 
     const plane = new Mesh(geometry, material)
     corgi.scene.add(plane)
-
-    gsap.ticker.add((time) => {
-      material.uniforms.uTime.value += time * 0.001
-    })
   })
+
+  gsap.ticker.add(update)
 })
 
 onUnmounted(() => {
+  gsap.ticker.remove(update)
   corgi?.unmount()
 })
+
+// Methods
+const update = (time) => {
+  if (!material) return
+  material.uniforms.uTime.value = time
+}
 </script>
 
 <style scoped>

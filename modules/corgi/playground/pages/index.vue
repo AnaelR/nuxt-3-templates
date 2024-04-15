@@ -3,29 +3,12 @@
     <div class="Home-side">
       <h1>CorGI 🐶</h1>
       <ul>
-        <li>
-          <nuxt-link to="/envmap">
-            Envmap
-          </nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/models">
-            GLTF models
-          </nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/texture">
-            Texture
-          </nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/shaders">
-            Shaders
-          </nuxt-link>
-        </li>
-        <li>
-          <nuxt-link to="/custom-shaders">
-            Custom shaders
+        <li
+          v-for="(item, i) in pages"
+          :key="`item-${i}`"
+        >
+          <nuxt-link :to="item.to">
+            {{ item.label }}
           </nuxt-link>
         </li>
       </ul>
@@ -36,10 +19,14 @@
 </template>
 
 <script setup>
-
-// Lifecycle
-onMounted(() => {
-})
+// Data
+const pages = [
+  { label: 'Envmap', to: '/envmap' },
+  { label: 'GLTF models', to: '/models' },
+  { label: 'Texture', to: '/texture' },
+  { label: 'Shaders', to: '/shaders' },
+  { label: 'Custom shaders', to: '/custom-shaders' },
+]
 
 </script>
 
@@ -74,6 +61,27 @@ onMounted(() => {
 
     font-size: 18px;
     text-align: left;
+  }
+
+  li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    list-style: none;
+
+    gap: 1rem;
+
+    &::before {
+      display: block;
+      width: 4px;
+      height: 4px;
+
+      background-color: white;
+
+      transform: rotate(45deg);
+      content: '';
+    }
   }
 
   a {

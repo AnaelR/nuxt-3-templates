@@ -35,7 +35,7 @@ a {
 }
 
 h1 {
-  font-size: 58px;
+  font-size: 44px;
 
 }
 </style>
