@@ -4,12 +4,6 @@
       ref="canvas"
       class="Page-canvas"
     />
-    <article>
-      <h1>GLTF models</h1>
-      <nuxt-link to="/">
-        Go to home
-      </nuxt-link>
-    </article>
   </div>
 </template>
 
@@ -59,32 +53,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.Page {
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: flex-start;
-
-  box-sizing: border-box;
-
-  padding-top: 2rem;
-
-  z-index: 0;
-}
-
-.Page article {
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 10px;
-
-  z-index: 1;
-}
-
 .Page-canvas {
   position: absolute;
   width: 100% !important;

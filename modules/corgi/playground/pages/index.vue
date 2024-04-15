@@ -1,33 +1,37 @@
 <template>
   <main class="Home">
-    <h1>CorGI 🐶</h1>
-    <ul>
-      <li>
-        <nuxt-link to="/envmap">
-          Envmap
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/models">
-          GLTF models
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/texture">
-          Texture
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/shaders">
-          Shaders
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/custom-shaders">
-          Custom shaders
-        </nuxt-link>
-      </li>
-    </ul>
+    <div class="Home-side">
+      <h1>CorGI 🐶</h1>
+      <ul>
+        <li>
+          <nuxt-link to="/envmap">
+            Envmap
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/models">
+            GLTF models
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/texture">
+            Texture
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/shaders">
+            Shaders
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/custom-shaders">
+            Custom shaders
+          </nuxt-link>
+        </li>
+      </ul>
+    </div>
+
+    <NuxtPage class="Home-page" />
   </main>
 </template>
 
@@ -43,15 +47,19 @@ onMounted(() => {
 .Home {
   position: relative;
   display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: flex-start;
-
-  box-sizing: border-box;
-
-  padding-top: 2rem;
+  flex-flow: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
 
   z-index: 0;
+
+}
+
+.Home-side {
+  max-width: 300px;
+
+  padding: 2rem 3rem;
 
   ul {
     display: flex;
@@ -73,8 +81,18 @@ onMounted(() => {
     text-decoration: none;
 
     &:hover {
-      color: violet;
+      color: #798E7B;
+    }
+
+    &.router-link-active {
+      font-weight: bold;
+      color: #798E7B;
+
     }
   }
+}
+
+.Home-page {
+  width: 100%;
 }
 </style>
