@@ -9,7 +9,7 @@
 [x] - Add shaders resources
 [x] - Check glslify for vite
 [x] - Custom shaders integration
-[ ] - Custom shaders import library
+[x] - Custom shaders import library
 [ ] - Planes that match HTML content position
 [ ] - Three points light preset
 [ ] - Shadow utils
@@ -19,5 +19,5 @@
 [ ] - Add callback for when useCorgi is ready aka has draw at least one frame
 [ ] - Post process
 [ ] - Optionnal CorgiCanvas.vue that has props for loading and using different resources in props ? resources,transform
-[ ] - Write a comprehensive Readme about what is this, how you can use it (bonus add cute corgi picture)
+[ ] - Write a comprehensive Readme about what is this, how you can use it (bonus add cute corgi picture) - Try generated doc from jsdoc
 [ ] - Optimise Threejs import like React Three Fiber https://gracious-keller-98ef35.netlify.app/docs/recipes/reducing-bundle-size/
