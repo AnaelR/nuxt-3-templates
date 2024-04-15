@@ -1,153 +1,42 @@
 <template>
-  <div class="Home">
-    <canvas
-      ref="canvas"
-      class="Home-canvas"
-    />
-    <article>
-      <h1>Home</h1>
-      <nuxt-link to="/page">
-        Go to page
-      </nuxt-link>
-    </article>
-
-    <div class="MouseHelper">
-      <strong>Mouse position</strong>
-      <div>X: {{ mouse.normalized.x.toPrecision(2) }} / 1</div>
-      <div>Y: {{ mouse.normalized.y.toPrecision(2) }} / 1</div>
-    </div>
-  </div>
+  <main class="Home">
+    <h1>CorGI 🐶</h1>
+    <ul>
+      <li>
+        <nuxt-link to="/envmap">
+          Envmap
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/models">
+          GLTF models
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/texture">
+          Texture
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/shaders">
+          Shaders
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/custom-shaders">
+          Custom shaders
+        </nuxt-link>
+      </li>
+    </ul>
+  </main>
 </template>
 
 <script setup>
-import { RESOURCES_TYPES } from '../../src/runtime/utils/types'
-import { getChild } from '../../src/runtime/utils/gltf'
-import { AgXToneMapping, DoubleSide, Mesh, MeshStandardMaterial, PlaneGeometry, RawShaderMaterial, Color } from 'three'
-import { gsap } from 'gsap'
-import { CustomShaderMaterial } from 'three-custom-shader-material/dist/vanilla-a1542be4.cjs.prod'
-
-// Data
-const canvas = ref()
-
-/**
- * @type {import('../../src/runtime/composables/corgi').UseCorgi}
- */
-let corgi = null
-const resources = useResources()
-
-const mouse = ref({ normalized: { x: 0, y: 0 } })
 
 // Lifecycle
 onMounted(() => {
-
-  corgi = useCorgi(canvas.value)
-
-  corgi.camera.position.set(0, 0, 5)
-  corgi.addOrbitControls()
-
-  corgi.renderer.toneMapping = AgXToneMapping
-
-  resources.add(
-    [
-      useResource('envmap', '/envmap.exr', RESOURCES_TYPES.EXR),
-      useResource('suzanne', '/suzanne.glb', RESOURCES_TYPES.GLTF),
-      useResource('suzanne-draco', '/suzanne-draco.glb', RESOURCES_TYPES.GLTF),
-      useResource('akaru', '/akaru-texture.png', RESOURCES_TYPES.IMAGE),
-      useResource('fragment', import('@/assets/fragment.glsl'), RESOURCES_TYPES.GLSL),
-      useResource('vertex', import('@/assets/vertex.glsl'), RESOURCES_TYPES.GLSL),
-      useResource('custom-fragment', import('@/assets/custom-fragment.glsl'), RESOURCES_TYPES.GLSL),
-      useResource('custom-vertex', import('@/assets/custom-vertex.glsl'), RESOURCES_TYPES.GLSL),
-    ]
-  )
-
-  resources.get('envmap').then((resource) => {
-    corgi.addEnvmap(resource.asset)
-  })
-
-  resources.get('suzanne').then((resource) => {
-    if (!resource) return
-    const suzanne = getChild(resource.asset.scene, "Suzanne")
-    corgi.scene.add(suzanne)
-  })
-
-  resources.get('akaru').then((resource) => {
-    const geometry = new PlaneGeometry(10, 10)
-    const material = new MeshStandardMaterial({
-      map: resource.asset,
-      metalness: 1,
-      side: DoubleSide,
-    })
-    const plane = new Mesh(geometry, material)
-    plane.position.z = -10
-    corgi.scene.add(plane)
-  })
-
-  resources.get(['fragment', 'vertex']).then((resources) => {
-    const [fragmentShader, vertexShader] = resources
-    const geometry = new PlaneGeometry(10, 10)
-    const material = new RawShaderMaterial({
-      uniforms: {
-        uTime: { value: 0 }
-      },
-      fragmentShader: fragmentShader.asset,
-      vertexShader: vertexShader.asset,
-    })
-
-    const plane = new Mesh(geometry, material)
-    plane.position.x = 10
-    plane.position.z = -10
-    corgi.scene.add(plane)
-
-    gsap.ticker.add((time) => {
-      material.uniforms.uTime.value += time * 0.001
-    })
-  })
-
-  resources.get(['custom-fragment', 'custom-vertex']).then((resources) => {
-    const [fragmentShader, vertexShader] = resources
-    const geometry = new PlaneGeometry(10, 10)
-    const material = new CustomShaderMaterial({
-      baseMaterial: new MeshStandardMaterial({
-        color: new Color("green"),
-      }),
-      uniforms: {
-        uTime: { value: 0 }
-      },
-      fragmentShader: fragmentShader.asset,
-      vertexShader: vertexShader.asset,
-    })
-
-    const plane = new Mesh(geometry, material)
-    plane.position.x = -10
-    plane.position.z = -10
-    corgi.scene.add(plane)
-
-    gsap.ticker.add((deltaTime) => {
-      material.uniforms.uTime.value += deltaTime * 0.001
-    })
-  })
-
-  mouse.value = useNormalizedMouse(canvas.value)
-
-  /*
-  resources.get('suzanne-draco').then((resource) => {
-    if (!resource) return
-    const suzanne = getChild(resource.asset.scene, "Suzanne")
-    suzanne.position.x = 2
-    corgi.scene.add(suzanne)
-  })
-  */
-
-  /*
-  resources.getAll().then((resources) => {
-    console.info(resources)
-  })
- */
 })
 
-onUnmounted(() => {
-  corgi?.unmount()
-})
 </script>
 
 <style scoped>
@@ -163,50 +52,29 @@ onUnmounted(() => {
   padding-top: 2rem;
 
   z-index: 0;
-}
 
-.Home article {
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: center;
+  ul {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: flex-start;
 
-  gap: 10px;
+    margin-top: 50px;
+    gap: 30px;
 
-  z-index: 1;
-}
+    width: 200px;
 
-.Home-canvas {
-  position: absolute;
-  width: 100% !important;
-  height: 100% !important;
+    font-size: 18px;
+    text-align: left;
+  }
 
-  top: 0;
-  left: 0;
+  a {
+    height: 20px;
+    text-decoration: none;
 
-  z-index: 0;
-}
-
-.MouseHelper {
-  position: absolute;
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-
-  gap: 10px;
-  padding: 20px 30px 30px 30px;
-
-  background-color: #3b3b3b;
-
-
-  font-size: 16px;
-  color: white;
-
-  top: 0;
-  left: 0;
-
-  z-index: 1;
+    &:hover {
+      color: violet;
+    }
+  }
 }
 </style>

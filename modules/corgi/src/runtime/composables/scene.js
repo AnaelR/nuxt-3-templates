@@ -1,6 +1,6 @@
 import { Color, Scene } from "three"
 
-export const useScene = (color = "#FCCF91") => {
+export const useScene = (color = "#1a1a1b") => {
 
   const scene = new Scene()
   scene.background = new Color(color)
