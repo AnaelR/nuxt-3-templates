@@ -10,6 +10,7 @@
 [x] - Check glslify for vite
 [x] - Custom shaders integration
 [x] - Custom shaders import library
+[ ] - Maybe add utils for glsl like noise, transform and others i can't think of
 [ ] - Planes that match HTML content position
 [ ] - Three points light preset
 [ ] - Shadow utils

@@ -44,7 +44,7 @@ onMounted(() => {
 
   resources.get(['custom-fragment', 'custom-vertex']).then((resources) => {
     const [fragmentShader, vertexShader] = resources
-    const geometry = new PlaneGeometry(5, 5)
+    const geometry = new PlaneGeometry(5, 5, 256, 256)
     material = new CustomShaderMaterial({
       baseMaterial: new MeshBasicMaterial({
         color: new Color("green"),
@@ -68,6 +68,7 @@ onMounted(() => {
 onUnmounted(() => {
   gsap.ticker.remove(update)
   corgi?.unmount()
+
 })
 
 // Methods
