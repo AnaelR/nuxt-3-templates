@@ -9,7 +9,7 @@
 
 <script setup>
 import { RESOURCES_TYPES } from '../../src/runtime/utils/types'
-import { AgXToneMapping, Color, DoubleSide, Mesh, MeshBasicMaterial, MeshStandardMaterial, PlaneGeometry } from 'three'
+import { AgXToneMapping, Color, DoubleSide, Mesh, MeshBasicMaterial, PlaneGeometry } from 'three'
 import { gsap } from 'gsap'
 // Did not find a better way to import in vanilla
 import { CustomShaderMaterial } from 'three-custom-shader-material/dist/vanilla-a1542be4.cjs.prod'
