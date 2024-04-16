@@ -2,19 +2,19 @@ import { WebGLRenderer } from "three"
 
 /**
  * @typedef {Object} UseRenderer
- * @property {function(scene:THREE.Scene,camere:THREE.Camera):void} render - Call the render method for the THREE.WebGLRenderer
+ * @property {function(scene:import('three').Scene,camere:import('three').Camera):void} render - Call the render method for the THREE.WebGLRenderer
  * @property {function(width:Number,height:Number):void} resize - Resize the renderer
  */
 
 /**
  *
- * @param {THREE.WebGLRendererParameters} options
+ * @param {import('three').WebGLRendererParameters} options
  * @returns {UseRenderer}
  */
 export const useRenderer = (options) => {
 
   /**
-   * @type {THREE.WebGLRendererParameters}
+   * @type {import('three').WebGLRendererParameters}
    */
   const defaultOptions = {
     powerPreference: "high-performance",
@@ -24,7 +24,7 @@ export const useRenderer = (options) => {
   }
 
   /**
-   * @type {THREE.WebGLRenderer}
+   * @type {import('three').WebGLRenderer}
    */
   const renderer = new WebGLRenderer(
     { ...defaultOptions, ...options }
@@ -34,8 +34,8 @@ export const useRenderer = (options) => {
 
   /**
    * Call the render method for the THREE.WebGLRenderer
-   * @param {THREE.Scene} scene
-   * @param {THREE.Camera} camera
+   * @param {import('three').Scene} scene
+   * @param {import('three').Camera} camera
    */
   const render = (scene, camera) => {
     renderer.render(scene, camera)

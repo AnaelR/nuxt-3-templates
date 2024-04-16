@@ -39,10 +39,10 @@ onMounted(() => {
   )
 
   resources.get(['envmap', 'suzanne']).then((resources) => {
-    const [envmapResource, suzanneResource] = resources
+    const [envmapResource, modelResource] = resources
     corgi.addEnvmap(envmapResource.asset)
 
-    const suzanne = suzanneResource.asset.scene.getObjectByName("Suzanne")
+    const suzanne = modelResource.asset.scene.getObjectByName("Suzanne")
     corgi.scene.add(suzanne)
   })
 })

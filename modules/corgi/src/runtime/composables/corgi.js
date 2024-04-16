@@ -8,9 +8,9 @@ import { PMREMGenerator } from "three"
 
 /**
  * @typedef {Object} UseCorgi
- * @property {THREE.Scene} scene - THREE.Scene
- * @property {THREE.WebGLRenderer} renderer - THREE.WebGLRenderer
- * @property {THREE.PerspectiveCamera} camera - THREE.PerspectiveCamera
+ * @property {import('three').Scene} scene - THREE.Scene
+ * @property {import('three').WebGLRenderer} renderer - THREE.WebGLRenderer
+ * @property {import('three').PerspectiveCamera} camera - THREE.PerspectiveCamera
  * @property {Function} unmount - Remove all event listener, clear all that need to be cleaned (textures etc)
  */
 

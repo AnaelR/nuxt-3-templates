@@ -11,8 +11,8 @@
 import { RESOURCES_TYPES } from '../../src/runtime/utils/types'
 import { AgXToneMapping, Color, DoubleSide, Mesh, MeshBasicMaterial, PlaneGeometry } from 'three'
 import { gsap } from 'gsap'
-// Did not find a better way to import in vanilla
-import { CustomShaderMaterial } from 'three-custom-shader-material/dist/vanilla-a1542be4.cjs.prod'
+
+import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 
 // Data
 const canvas = ref()
@@ -26,7 +26,10 @@ const resources = useResources()
 
 
 // Lifecycle
-onMounted(() => {
+onMounted(async () => {
+
+  // Did not find a better way to import in vanilla
+  // const CustomShaderMaterial = (await import('three-custom-shader-material/vanilla')).default
 
   corgi = useCorgi(canvas.value)
 

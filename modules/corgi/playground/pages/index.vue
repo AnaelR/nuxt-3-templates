@@ -26,6 +26,7 @@ const pages = [
   { label: 'Texture', to: '/texture' },
   { label: 'Shaders', to: '/shaders' },
   { label: 'Custom shaders', to: '/custom-shaders' },
+  { label: 'Particles', to: '/particles' },
 ]
 
 </script>
