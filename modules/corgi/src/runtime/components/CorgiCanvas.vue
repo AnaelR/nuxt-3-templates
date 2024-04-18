@@ -6,24 +6,57 @@
 </template>
 
 <script setup>
-import useCorgi from "../composables/corgi"
+import { RESOURCES_TYPES } from '../utils/types';
+
+// Props
+const props = defineProps({
+  model: String,
+  envmap: String,
+  haveOrbitControls: Boolean
+})
 
 // Data
 const el = ref()
+const resourcesName = ref([])
 
-/**
- * @type {import('../composables/corgi').UseCorgi}
- */
+const resources = useResources()
+
 let corgi = null
 
 // Lifecycle
 onMounted(() => {
   corgi = useCorgi(el.value)
+
+  if (props.model) {
+    addModel(props.model)
+  }
+
+  if (props.envmap) {
+    addEnvmap(props.envmap)
+  }
+
+
+  manageResources()
 })
 
 onUnmounted(() => {
   corgi?.unmount()
 })
+
+const manageResources = () => {
+  resources.get(resourcesName).then((loadedResources) => {
+  })
+}
+
+const addModel = (modelPath) => {
+  console.log('model', modelPath);
+  resources.add(useResource('model', modelPath, RESOURCES_TYPES.GLTF))
+  resourcesName.push('model')
+}
+
+const addEnvmap = (envmapPath) => {
+
+}
 
 </script>
 

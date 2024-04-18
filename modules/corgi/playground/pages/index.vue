@@ -27,6 +27,7 @@ const pages = [
   { label: 'Shaders', to: '/shaders' },
   { label: 'Custom shaders', to: '/custom-shaders' },
   { label: 'Particles', to: '/particles' },
+  { label: 'CorgiCanvas', to: '/canvas-component' },
 ]
 
 </script>
